@@ -1,11 +1,11 @@
 export interface NoteTag {
-  _id: string;
+  id: string;
   name: string;
   slug: string;
 }
 
 export interface Note {
-  _id: string;
+  id: string;
   title: string;
   content: string;
   tag: NoteTag;
