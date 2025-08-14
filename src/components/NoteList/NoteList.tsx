@@ -34,11 +34,11 @@ export default function NoteList({ notes }: NoteListProps) {
   return (
     <ul className={css.list}>
       {notes.map((note) => (
-        <li key={note._id} className={css.listItem}>
+        <li key={note.id} className={css.listItem}>
           <h2 className={css.title}>{note.title}</h2>
           <p className={css.content}>{note.content}</p>
           <div className={css.footer}>
-            <span className={css.tag}>{note.tag}</span>
+            <span className={css.tag}>{note.tag.name}</span>
             <button onClick={() => handleDelete(note.id)} className={css.button}>
               Delete
             </button>
