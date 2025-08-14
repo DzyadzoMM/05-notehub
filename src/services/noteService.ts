@@ -33,7 +33,7 @@ export const createNote = async (payload: CreateNotePayload): Promise<Note> => {
   return data;
 };
 
-export const deleteNote = async (id: string): Promise<{ _id: string }> => {
+export const deleteNote = async (id: string): Promise<{ id: string }> => {
   const { data } = await instance.delete<{ _id: string }>(`/notes/${id}`);
   return data;
 };
