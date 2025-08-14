@@ -9,17 +9,7 @@ import Pagination from '../Pagination/Pagination';
 import NoteList from '../NoteList/NoteList';
 import NoteForm from '../NoteForm/NoteForm';
 import Modal from '../Modal/Modal';
-
-interface Note {
-  _id: string;
-  title: string;
-  content: string;
-}
-
-interface FetchNotesResponse {
-  notes: Note[];
-  totalPages: number;
-}
+import  {Note, FetchNotesResponse}  from '../../types/note';
 
 export default function App() {
   const [page, setPage] = useState<number>(1);
