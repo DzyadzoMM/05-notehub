@@ -2,15 +2,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteNote } from '../../services/noteService';
 import css from './NoteList.module.css';
 
-interface Tag {
-  name: string;
-}
-
 interface Note {
   id: string;
   title: string;
   content: string;
-  tag: Tag;
+  tag: string;
 }
 
 interface NoteListProps {
