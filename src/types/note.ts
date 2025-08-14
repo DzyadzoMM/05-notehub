@@ -1,14 +1,8 @@
-export interface NoteTag {
-  id: string;
-  name: string;
-  slug: string;
-}
-
 export interface Note {
   id: string;
   title: string;
   content: string;
-  tag: NoteTag;
+  tag: string;
   createdAt: string;
   updatedAt: string;
 }
