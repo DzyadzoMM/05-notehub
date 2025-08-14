@@ -38,7 +38,7 @@ export default function NoteList({ notes }: NoteListProps) {
           <h2 className={css.title}>{note.title}</h2>
           <p className={css.content}>{note.content}</p>
           <div className={css.footer}>
-            <span className={css.tag}>{note.tag.name}</span>
+            <span className={css.tag}>{note.tag}</span>
             <button onClick={() => handleDelete(note.id)} className={css.button}>
               Delete
             </button>
