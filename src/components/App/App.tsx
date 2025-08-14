@@ -17,7 +17,7 @@ export default function App() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
 
-  const { data, isLoading, isError } = useQuery<Note[]>({
+  const { data, isLoading, isError } = useQuery<FetchNotesResponse>({
     queryKey: ['notes', page, debouncedSearchTerm],
     queryFn: () => fetchNotes({ page, search: debouncedSearchTerm }),
     keepPreviousData: true,
