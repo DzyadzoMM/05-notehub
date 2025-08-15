@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchNotes } from '../../services/noteService';
+import { fetchNotes, FetchNotesResponse } from '../../services/noteService';
 import { useDebounce } from 'use-debounce';
 import css from './App.module.css';
 
@@ -10,18 +10,14 @@ import NoteList from '../NoteList/NoteList';
 import NoteForm from '../NoteForm/NoteForm';
 import Modal from '../Modal/Modal';
 
-interface FetchNotesResponse{
-  notes: Note[];
-  totalPages: number;
-}
-
 export default function App() {
   const [page, setPage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [showModal, setShowModal] = useState<boolean>(false);
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
   const handleSearchChange = (newSearchTerm: string) => { setSearchTerm(newSearchTerm);
-  setPage (1);};
+  setPage (1);
+  };
 
   const { data, isLoading, isError } = useQuery<FetchNotesResponse>({
     queryKey: ['notes', page, debouncedSearchTerm],
