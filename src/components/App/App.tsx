@@ -9,23 +9,30 @@ import Pagination from '../Pagination/Pagination';
 import NoteList from '../NoteList/NoteList';
 import NoteForm from '../NoteForm/NoteForm';
 import Modal from '../Modal/Modal';
-import  {FetchNotesResponse}  from '../../types/note';
+
+interface FetchNotesResponse{
+  notes: Note[];
+  totalPages: number;
+}
 
 export default function App() {
   const [page, setPage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [showModal, setShowModal] = useState<boolean>(false);
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
+  const handleSearchChange = (newSearchTerm: string) => { setSearchTerm(newSearchTerm);
+  setPage (1);};
 
   const { data, isLoading, isError } = useQuery<FetchNotesResponse>({
     queryKey: ['notes', page, debouncedSearchTerm],
     queryFn: () => fetchNotes({ page, search: debouncedSearchTerm }),
+    placeholderData: (previousData) => previousData,
   });
 
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
-        <SearchBox searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <SearchBox searchTerm={searchTerm} setSearchTerm={handleSearchChange} />
         {data && data.totalPages > 1 && (
           <Pagination
             currentPage={page}
@@ -38,7 +45,7 @@ export default function App() {
         </button>
       </header>
 
-      {isLoading && <p>Loading...</p>}
+      {isLoading && !data && <p>Loading...</p>}
       {isError && <p>Error fetching notes.</p>}
       {data && data.notes.length > 0 && <NoteList notes={data.notes} />}
       {data && data.notes.length === 0 && !isLoading && <p>No notes found.</p>}
